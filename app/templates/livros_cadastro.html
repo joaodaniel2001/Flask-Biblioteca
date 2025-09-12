@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+<!-- Título -->
+{% block title %} Página Inicial {% endblock %}
+
+<!-- Head -->
+{% block head %} {% endblock %}
+
+<!-- Body -->
+{% block content %}
+
+<section class="cont-Login">
+
+    <!-- Título -->
+    <div class="row text-center mb-4 mt-3">
+        <div class="col">
+            <h1><strong>Cadastro de livros</strong></h1>
+        </div>
+    </div>
+
+    <!-- Formulário -->
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-3">
+            <form action="" method="post" class="border rounded p-4 shadow-sm bg-white">
+                {{ form.csrf_token }}
+
+                <div class="mb-3">
+                    {{ form.titulo.label(class="form-label") }}
+                    {{ form.titulo(class="form-control") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.autor.label(class="form-label") }}
+                    {{ form.autor(class="form-control") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.ano_publicacao.label(class="form-label") }}
+                    {{ form.ano_publicacao(class="form-control") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.genero.label(class="form-label") }}
+                    {{ form.genero(class="form-control") }}
+                </div>
+
+                {{ form.btnSubmit(class="btn btn-dark w-100 mt-3") }}
+            </form>
+        </div>
+
+</section>
+
+{% endblock %}

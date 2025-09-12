@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+<!-- Título -->
+{% block title %} Página Inicial {% endblock %}
+
+<!-- Head -->
+{% block head %} {% endblock %}
+
+<!-- Body -->
+{% block content %}
+
+<section class="container">
+
+    <!-- Título -->
+    <div class="row text-center mb-4 mt-4">
+        <div class="col">
+            <h1><strong>Livros Disponíveis</strong></h1>
+            {% if current_user.email != 'joaodaniel1al@gmail.com' %}
+            <p> Se não achar, basta pesquisar</p>
+            {% else %}
+            <p> Quer adicionar livros? <a href="{{url_for('livros_cadastro')}}">Clique aqui</a></p>
+            {% endif %}
+        </div>
+    </div>
+
+
+
+    <form method="get" class="row justify-content-center mb-4 w-100">
+        <div class="col-5">
+            <input type="text" name="pesquisa" class="form-control" placeholder="Seu livro preferido...">
+        </div>
+
+        <div class="col-2">
+            <button type="submit" class="btn btn-dark w-100">Pesquisar</button>
+        </div>
+
+    </form>
+
+    <div class="col-12 mt-5">
+        <table class="table">
+            <thead>
+                <th>ID</th>
+                <th>Autor</th>
+                <th>Título</th>
+                <th>Ano de Publicação</th>
+                <th>Gênero</th>
+            </thead>
+
+            <tbody>
+                {% for linha in context['dados'] %}
+                <tr>
+                    <td>{{linha.id}}</td>
+                    <td>{{linha.autor}}</td>
+                    <td>{{linha.titulo}}</td>
+                    <td>{{linha.ano_publicacao}}</td>
+                    <td>{{linha.genero}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% endblock %}
