@@ -15,7 +15,7 @@
     <div class="row text-center mb-4 mt-4">
         <div class="col">
             <h1><strong>Livros Disponíveis</strong></h1>
-            {% if current_user.email != 'joaodaniel1al@gmail.com' %}
+            {% if current_user.email != 'admin@gmail.com' %}
             <p> Se não achar, basta pesquisar</p>
             {% else %}
             <p> Quer adicionar livros? <a href="{{url_for('livros_cadastro')}}">Clique aqui</a></p>
@@ -44,6 +44,8 @@
                 <th>Título</th>
                 <th>Ano de Publicação</th>
                 <th>Gênero</th>
+                <th>Quantidade</th>
+                <th></th>
             </thead>
 
             <tbody>
@@ -54,6 +56,14 @@
                     <td>{{linha.titulo}}</td>
                     <td>{{linha.ano_publicacao}}</td>
                     <td>{{linha.genero}}</td>
+                    <td>{{linha.quantidade}}</td>
+                    {% if current_user.email == "admin@gmail.com" %}
+                    <td><a href="{{ url_for('edit_livro', id=linha.id) }}" class="btn btn-outline-dark">Editar</a>
+                    <form action="{{ url_for('delete_livro', id=linha.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Excluir</button></td>
+                    </form>
+
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>

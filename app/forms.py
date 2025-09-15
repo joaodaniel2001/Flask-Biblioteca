@@ -64,6 +64,7 @@ class LivroForm (FlaskForm):
     titulo = StringField ('Título', validators=[DataRequired()])
     ano_publicacao = IntegerField('Ano de Publicacão', validators=[DataRequired()])
     genero = StringField ('Gênero', validators=[DataRequired()])
+    quantidade = IntegerField ('Quantidade', validators=[DataRequired()])
     btnSubmit = SubmitField('Cadastrar')
 
     def save (self):
@@ -71,9 +72,19 @@ class LivroForm (FlaskForm):
             titulo = self.titulo.data,
             autor = self.autor.data,
             ano_publicacao = self.ano_publicacao.data,
-            genero = self.genero.data
+            genero = self.genero.data,
+            quantidade = self.quantidade.data
         )
         
         db.session.add(livro)
+        db.session.commit()
+        return livro
+    
+    def update(self, livro):
+        livro.autor = self.autor.data
+        livro.titulo = self.titulo.data
+        livro.ano_publicacao = self.ano_publicacao.data
+        livro.genero = self.genero.data
+        livro.quantidade = self.quantidade.data
         db.session.commit()
         return livro

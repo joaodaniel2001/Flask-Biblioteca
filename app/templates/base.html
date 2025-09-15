@@ -27,7 +27,7 @@
 
             <nav class="nav gap-2 my-2 my-md-0">
                 <a class="btn btn-outline-dark" href="{{ url_for('homepage') }}">Página inicial</a>
-                {% if current_user.email == 'joaodaniel1al@gmail.com' %}
+                {% if current_user.email == 'admin@gmail.com' %}
                 <a class="btn btn-outline-dark" href="#">Gerenciamento de Usuários</a>
                 {% endif %}
                 <a class="btn btn-outline-dark" href="{{ url_for('livros') }}">Livros Disponíveis</a>

@@ -21,3 +21,4 @@ class Livro (db.Model):
     titulo = db.Column (db.String, nullable = True)
     ano_publicacao = db.Column (db.Integer, nullable = True)
     genero = db.Column (db.String, nullable = True)
+    quantidade = db.Column (db.Integer, nullable = True)

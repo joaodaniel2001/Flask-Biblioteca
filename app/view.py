@@ -1,5 +1,5 @@
 
-from app import app
+from app import app, db
 from flask import render_template, url_for, request, redirect
 from app.forms import UserForm, LoginForm, LivroForm
 from flask_login import login_user, logout_user, current_user, login_required
@@ -57,3 +57,26 @@ def livros_cadastro():
         form.save()
         return redirect(url_for('livros'))
     return render_template("livros_cadastro.html", form=form)
+
+# Página Livro Edição
+@app.route('/livro/edicao/<int:id>', methods=['GET', 'POST'])
+def edit_livro(id):
+    livro = Livro.query.get_or_404(id)
+    form = LivroForm(obj=livro)
+
+    if form.validate_on_submit():
+        form.update(livro)  # atualiza todos os campos corretamente
+        return redirect(url_for('livros'))
+
+    return render_template('livros_edicao.html', form=form, livro=livro)
+
+# Deletar um livro
+@app.route('/livro/excluir/<int:id>', methods=['POST'])
+@login_required
+def delete_livro(id):
+    livro = Livro.query.get_or_404(id)
+    db.session.delete(livro)
+    db.session.commit()
+    return redirect(url_for('livros'))
+
+
